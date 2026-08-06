@@ -1,5 +1,5 @@
 (() => {
-  const sectionIds = ["overview", "demo", "l3rocc", "occplanner", "results"];
+  const sectionIds = ["real-demos", "demo", "overview", "l3rocc", "occplanner", "results"];
   const sections = sectionIds
     .map((id) => document.getElementById(id))
     .filter(Boolean);
@@ -7,6 +7,7 @@
     'nav a[href^="#"], .mobile-nav-panel a[href^="#"]'
   )];
   const mobileNav = document.querySelector(".mobile-nav");
+  const autoplayVideos = [...document.querySelectorAll("video.viewport-autoplay")];
 
   const setActiveSection = () => {
     const marker = window.scrollY + window.innerHeight * 0.3;
@@ -57,5 +58,41 @@
 
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
+
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target;
+        const shouldPlay = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        video.dataset.inViewport = shouldPlay ? "true" : "false";
+        if (shouldPlay && !document.hidden) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      }
+    }, { threshold: [0, 0.35, 0.75] });
+
+    for (const video of autoplayVideos) {
+      video.muted = true;
+      videoObserver.observe(video);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      for (const video of autoplayVideos) {
+        if (document.hidden) {
+          video.pause();
+        } else if (video.dataset.inViewport === "true") {
+          video.play().catch(() => {});
+        }
+      }
+    });
+  } else {
+    for (const video of autoplayVideos) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+  }
+
   setActiveSection();
 })();

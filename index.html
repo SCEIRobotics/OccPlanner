@@ -6,21 +6,22 @@
   <meta name="description" content="OccPlanner grounds pixel goals in visibility-aware local 3D occupancy and generates continuous obstacle-aware trajectories with a diffusion policy.">
   <meta name="theme-color" content="#f5f5f2">
   <title>OccPlanner — 3D Occupancy and Diffusion Planning</title>
-  <link rel="stylesheet" href="./style.css?v=20260804-11">
-  <script src="./script.js?v=20260804-1" defer></script>
+  <link rel="stylesheet" href="./style.css?v=20260805-3">
+  <script src="./script.js?v=20260805-1" defer></script>
 </head>
 <body>
 <main id="top">
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="OccPlanner home"><span>Occ</span>Planner</a>
     <nav aria-label="Project navigation">
-      <a href="#overview">Overview</a><a href="#demo">Demos</a><a href="#l3rocc">L3ROcc</a><a href="#occplanner">OccPlanner</a><a href="#results">Results</a>
+      <a href="#real-demos">Real Demos</a><a href="#demo">System Demos</a><a href="#overview">Overview</a><a href="#l3rocc">L3ROcc</a><a href="#occplanner">OccPlanner</a><a href="#results">Results</a>
     </nav>
     <details class="mobile-nav">
       <summary>Menu</summary>
       <div class="mobile-nav-panel">
+        <a href="#real-demos">Real Demos</a>
+        <a href="#demo">System Demos</a>
         <a href="#overview">Overview</a>
-        <a href="#demo">Demos</a>
         <a href="#l3rocc">L3ROcc</a>
         <a href="#occplanner">OccPlanner</a>
         <a href="#results">Results</a>
@@ -34,7 +35,7 @@
       <h1 id="hero-title">OccPlanner</h1>
       <h2>Goal-Aware Occupancy-Conditioned Diffusion Planner for Pixel-Goal Navigation</h2>
       <p class="hero-authors"><a href="https://github.com/hbl-0624" target="_blank" rel="noreferrer">Binling Huang</a><span>et al.</span></p>
-      <p class="hero-lead">A goal-aware planner that grounds an image-space target in local 3D scene structure and generates continuous, obstacle-aware trajectories.</p>
+      <p class="hero-lead">A goal-aware planner that grounds a pixel goal in local 3D scene structure and generates continuous, obstacle-aware trajectories.</p>
       <div class="hero-actions">
         <a class="button button-dark" href="#demo">Watch demos <span aria-hidden="true">↓</span></a>
         <span class="release-note">Paper &amp; code coming soon</span>
@@ -50,65 +51,86 @@
   </section>
 
   <section class="proof-strip section-wide" aria-label="Evaluation summary">
-    <div><strong>6,000</strong><span>closed-loop episodes</span></div><div><strong>60</strong><span>unseen indoor scenes</span></div><div><strong>4</strong><span>scene categories</span></div><div><strong>3–8 m</strong><span>long-range setting</span></div>
+    <div><strong>6,000</strong><span>closed-loop episodes</span></div><div><strong>60</strong><span>unseen indoor scenes</span></div><div><strong>4</strong><span>scene categories</span></div><div><strong>3–8 m</strong><span>evaluation range</span></div>
+  </section>
+
+  <section class="real-demos-section section-shell" id="real-demos" aria-labelledby="real-demos-title">
+    <div class="section-intro">
+      <div class="section-intro-side"><p class="section-kicker"><span>01</span> / Real-world Demos</p></div>
+      <div class="section-intro-copy">
+        <h2 id="real-demos-title">OccPlanner in the real world.</h2>
+        <p>Nine qualitative physical closed-loop navigation runs using the real-world fine-tuned OccPlanner on a Unitree G2 in cluttered office environments.</p>
+      </div>
+    </div>
+    <div class="real-video-grid">
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_1_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run one"><source src="./assets/real/web/real_1_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 01</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_2_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run two"><source src="./assets/real/web/real_2_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 02</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_3_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run three"><source src="./assets/real/web/real_3_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 03</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_4_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run four"><source src="./assets/real/web/real_4_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 04</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_5_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run five"><source src="./assets/real/web/real_5_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 05</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_6_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run six"><source src="./assets/real/web/real_6_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 06</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_7_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run seven"><source src="./assets/real/web/real_7_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 07</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_8_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run eight"><source src="./assets/real/web/real_8_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 08</figcaption></figure>
+      <figure><video class="viewport-autoplay" controls muted loop playsinline preload="none" poster="./assets/real/poster/real_9_poster.jpg?v=20260805-1" aria-label="Physical closed-loop Unitree G2 navigation run nine"><source src="./assets/real/web/real_9_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Closed-loop run 09</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="demo section-shell" id="demo" aria-labelledby="demo-title">
+    <div class="section-intro">
+      <div class="section-intro-side"><p class="section-kicker"><span>02</span> / System Demos</p></div>
+      <div class="section-intro-copy">
+        <h2 id="demo-title">From raw observations to navigable structure.</h2>
+        <p>Two complementary views of the system: offline supervision generated by L3ROcc and closed-loop predictions produced by OccPlanner.</p>
+      </div>
+    </div>
+    <div class="video-grid">
+      <article class="video-card">
+        <div class="video-topline"><span>Data engine</span><strong>L3ROcc</strong></div>
+        <video controls muted loop playsinline preload="metadata" poster="./assets/l3rocc/l3rocc_results_poster.jpg?v=20260805-1" aria-label="L3ROcc reconstruction and visibility-aware occupancy results"><source src="./assets/demos/l3rocc_results_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video>
+        <p>Monocular RGB video → shared reconstruction and robot-centric alignment → visibility-aware local occupancy.</p>
+      </article>
+      <article class="video-card video-card-accent">
+        <div class="video-topline"><span>Learned planner</span><strong>OccPlanner</strong></div>
+        <video controls muted loop playsinline preload="metadata" poster="./assets/occplanner/occplanner_sim_results_poster.jpg?v=20260805-1" aria-label="OccPlanner simulated navigation and trajectory prediction results"><source src="./assets/demos/occplanner_sim_results_web.mp4?v=20260805-1" type="video/mp4">Your browser does not support embedded video.</video>
+        <p>RGB-D history + pixel goal → voxel occupancy and compact occupancy tokens → action-space diffusion → obstacle-aware trajectory.</p>
+      </article>
+    </div>
   </section>
 
   <section class="statement section-shell" id="overview" aria-labelledby="overview-title">
     <div class="section-intro">
-      <div class="section-intro-side"><p class="section-kicker"><span>01</span> / Overview</p></div>
+      <div class="section-intro-side"><p class="section-kicker"><span>03</span> / Overview</p></div>
       <div class="section-intro-copy">
         <h2 id="overview-title">The pixel goal says <em>where</em> to go.<br>Occupancy reveals <em>how</em> to get there safely.</h2>
         <div class="overview-points">
-          <article><span>Planning · OccPlanner</span><p>Grounds the image-space target in robot-centric metric space, predicts local occupancy from RGB-D history, and distills near-ground geometry into compact tokens that condition diffusion-based trajectory generation.</p></article>
+          <article><span>Planning · OccPlanner</span><p>Grounds the pixel goal in robot-centric metric space, predicts local occupancy from RGB-D history, and distills near-ground geometry into compact tokens that condition diffusion-based trajectory generation.</p></article>
           <article><span>Supervision · L3ROcc</span><p>Turns monocular navigation videos into temporally consistent, robot-centric occupancy, visibility, and trajectory annotations for dense visibility-aware supervision.</p></article>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="demo section-shell" id="demo" aria-labelledby="demo-title">
-    <div class="section-intro">
-      <div class="section-intro-side"><p class="section-kicker"><span>02</span> / Demos</p></div>
-      <div class="section-intro-copy">
-        <h2 id="demo-title">From raw observations to navigable structure.</h2>
-        <p>Two complementary views of the system: offline supervision generated by L3ROcc and closed-loop predictions produced by OccPlanner. <a class="text-link" href="#real-demos">See real-world demos <span aria-hidden="true">↓</span></a></p>
-      </div>
-    </div>
-    <div class="video-grid">
-      <article class="video-card">
-        <div class="video-topline"><span>Data engine</span><strong>L3ROcc</strong></div>
-        <video controls muted loop playsinline preload="metadata" poster="./assets/l3rocc_result.png" aria-label="L3ROcc reconstruction and visibility-aware occupancy results"><source src="./assets/l3rocc_results.mp4" type="video/mp4">Your browser does not support embedded video.</video>
-        <p>Monocular RGB video → shared reconstruction and robot-centric alignment → visibility-aware local occupancy.</p>
-      </article>
-      <article class="video-card video-card-accent">
-        <div class="video-topline"><span>Learned planner</span><strong>OccPlanner</strong></div>
-        <video controls muted loop playsinline preload="metadata" poster="./assets/occplanner_sim_result.png" aria-label="OccPlanner simulated navigation and trajectory prediction results"><source src="./assets/occplanner_sim_results.mp4" type="video/mp4">Your browser does not support embedded video.</video>
-        <p>RGB-D history + pixel goal → voxel occupancy and compact occupancy tokens → action-space diffusion → obstacle-aware trajectory.</p>
-      </article>
-    </div>
-  </section>
-
   <section class="data-section section-shell" id="l3rocc" aria-labelledby="l3rocc-title">
     <div class="section-intro">
-      <div class="section-intro-side"><p class="section-kicker"><span>03</span> / L3ROcc</p></div>
+      <div class="section-intro-side"><p class="section-kicker"><span>04</span> / L3ROcc</p></div>
       <div class="section-intro-copy"><h2 id="l3rocc-title">Local 3D Reconstruction with Occupancy</h2><p>L3ROcc converts monocular RGB video sequences into temporally consistent, robot-centric supervision: sparse visible occupancy, binary visibility masks, and aligned camera trajectories. It reconstructs shared scene geometry and camera motion with π³, then aligns geometry, poses, and viewing rays to the robot base frame for visibility-aware occupancy generation.</p></div>
     </div>
-    <figure class="figure-card figure-wide"><a href="./assets/l3rocc_pipe.png" target="_blank" rel="noreferrer"><img src="./assets/l3rocc_pipe.png" width="4120" height="1800" loading="lazy" alt="L3ROcc data generation pipeline from monocular RGB video through geometric reconstruction and robot-centric alignment to visibility-aware local occupancy supervision"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>L3ROcc data generation pipeline.</strong> Given a monocular RGB video sequence, L3ROcc reconstructs scene geometry and camera motion with π³, aligns the recovered geometry, camera poses, and viewing rays into the robot-centric frame, and generates visibility-aware local occupancy supervision through voxelization and voxel-space ray marching.</figcaption></figure>
+    <figure class="figure-card figure-wide"><a href="./assets/l3rocc/l3rocc_pipe.png" target="_blank" rel="noreferrer"><img src="./assets/l3rocc/l3rocc_pipe.png" width="4120" height="1800" loading="lazy" alt="L3ROcc data generation pipeline from monocular RGB video through geometric reconstruction and robot-centric alignment to visibility-aware local occupancy supervision"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>L3ROcc data generation pipeline.</strong> Given a monocular RGB video sequence, L3ROcc reconstructs scene geometry and camera motion with π³, aligns the recovered geometry, camera poses, and viewing rays into the robot-centric frame, and generates visibility-aware local occupancy supervision through voxelization and voxel-space ray marching.</figcaption></figure>
     <div class="method-notes">
       <article><span>01</span><h3>Reconstruct</h3><p>Recover shared scene geometry, local pointmaps, confidence maps, sparse camera poses, and viewing rays with π³, then densify the camera trajectory.</p></article>
       <article><span>02</span><h3>Align</h3><p>Estimate an approximately metric scene scale when reference poses are available, then transform geometry, poses, and viewing rays into the robot base frame.</p></article>
       <article><span>03</span><h3>Label</h3><p>Voxelize aligned local geometry into candidate occupancy. Ray marching labels space before the first hit as free, the first hit as occupied, and space behind it as unobserved.</p></article>
     </div>
-    <figure class="figure-card"><a href="./assets/l3rocc_result.png" target="_blank" rel="noreferrer"><img src="./assets/l3rocc_result.png" width="2428" height="1872" loading="lazy" alt="Qualitative L3ROcc results with input RGB observations above corresponding robot-centric occupancy annotations for each trajectory"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative local occupancy generation results.</strong> For each trajectory, the top row shows input RGB observations and the bottom row shows the corresponding robot-centric occupancy annotations. L3ROcc produces temporally coherent local geometry while preserving the estimated camera trajectory across diverse indoor environments.</figcaption></figure>
+    <figure class="figure-card"><a href="./assets/l3rocc/l3rocc_result.png" target="_blank" rel="noreferrer"><img src="./assets/l3rocc/l3rocc_result.png" width="2428" height="1872" loading="lazy" alt="Qualitative L3ROcc results with input RGB observations above corresponding robot-centric occupancy annotations for each trajectory"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative local occupancy generation results.</strong> For each trajectory, the top row shows input RGB observations and the bottom row shows the corresponding robot-centric occupancy annotations. L3ROcc produces temporally coherent local geometry while preserving the estimated camera trajectory across diverse indoor environments.</figcaption></figure>
     <aside class="training-note"><strong>Training only.</strong> L3ROcc outputs sparse visible-occupancy sequences, packed binary visibility masks, and aligned camera trajectory metadata. It is not required during OccPlanner inference.</aside>
   </section>
 
   <section class="planner-section section-shell" id="occplanner" aria-labelledby="planner-title">
     <div class="section-intro">
-      <div class="section-intro-side"><p class="section-kicker"><span>04</span> / OccPlanner</p></div>
+      <div class="section-intro-side"><p class="section-kicker"><span>05</span> / OccPlanner</p></div>
       <div class="section-intro-copy"><h2 id="planner-title">Goal-Aware Occupancy-Conditioned Diffusion Planner</h2><p>OccPlanner is built on a shared π³-based RGB-D geometric encoder. It predicts voxel occupancy, distills near-ground occupancy features into compact tokens, and progressively integrates pixel-goal, temporal-context, and occupancy cues before denoising future actions into a trajectory.</p></div>
     </div>
-    <figure class="figure-card figure-wide"><a href="./assets/occplanner_pipe.png" target="_blank" rel="noreferrer"><img src="./assets/occplanner_pipe.png" width="4220" height="2078" loading="lazy" alt="OccPlanner architecture with a shared RGB-D geometric encoder, voxel occupancy and token distillation, sequential goal-aware interactions, and occupancy-conditioned action denoising"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>OccPlanner: Goal-Aware Occupancy-Conditioned Diffusion Planner.</strong> A shared RGB-D geometric encoder extracts spatiotemporal features and compact context tokens from the observation history. The occupancy branch predicts voxel occupancy and distills near-ground occupancy features into compact occupancy tokens. The goal-aware trajectory branch sequentially constructs the ego-goal token and final state token through goal-context interaction, goal-occupancy interaction, and goal-aware state decoding. The occupancy-conditioned planner then predicts future trajectories by denoising action tokens under structured geometric and goal-aware conditioning.</figcaption></figure>
+    <figure class="figure-card figure-wide"><a href="./assets/occplanner/occplanner_pipe.png" target="_blank" rel="noreferrer"><img src="./assets/occplanner/occplanner_pipe.png" width="4220" height="2078" loading="lazy" alt="OccPlanner architecture with a shared RGB-D geometric encoder, voxel occupancy and token distillation, sequential goal-aware interactions, and occupancy-conditioned action denoising"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>OccPlanner: Goal-Aware Occupancy-Conditioned Diffusion Planner.</strong> A shared RGB-D geometric encoder extracts spatiotemporal features and compact context tokens from the observation history. The occupancy branch predicts voxel occupancy and distills near-ground occupancy features into compact occupancy tokens. The goal-aware trajectory branch sequentially constructs the ego-goal token and final state token through goal-context interaction, goal-occupancy interaction, and goal-aware state decoding. The occupancy-conditioned planner then predicts future trajectories by denoising action tokens under structured geometric and goal-aware conditioning.</figcaption></figure>
     <div class="interaction-flow" aria-label="OccPlanner reasoning stages">
       <article><b>01</b><span>Encode</span><strong>Shared RGB-D geometric encoder</strong></article><i aria-hidden="true">→</i>
       <article><b>02</b><span>Distill</span><strong>Voxel occupancy + compact occupancy tokens</strong></article><i aria-hidden="true">→</i>
@@ -121,30 +143,36 @@
 
   <section class="results-section section-shell" id="results" aria-labelledby="results-title">
     <div class="section-intro">
-      <div class="section-intro-side"><p class="section-kicker"><span>05</span> / Results</p></div>
-      <div class="section-intro-copy"><h2 id="results-title">Obstacle-aware trajectories in simulation and the real world.</h2><p>We evaluate closed-loop navigation on the same fixed set of 6,000 episodes across 60 unseen indoor scenes, covering 3–5 m and 5–8 m start–goal ranges and reporting SR, SPL, and DTG. We then evaluate zero-shot sim-to-real transfer and real-world adaptation on RGB-D sequences recorded by a Unitree G1.</p></div>
+      <div class="section-intro-side"><p class="section-kicker"><span>06</span> / Results</p></div>
+      <div class="section-intro-copy"><h2 id="results-title">Obstacle-aware trajectories in simulation and the real world.</h2><p>We evaluate closed-loop navigation on the same fixed set of 6,000 episodes across 60 unseen indoor scenes, covering 3–5 m and 5–8 m start–goal ranges and reporting SR, SPL, and DTG. In the real world, we study zero-shot transfer and fine-tuning in open loop, then demonstrate physical closed-loop navigation with the fine-tuned model on a Unitree G2.</p></div>
     </div>
     <div class="metric-grid" aria-label="Long-range closed-loop results">
-      <article><p>Long range (5–8 m) · Home · SR</p><div><span>24.98<sup>%</sup></span><i>→</i><strong>69.90<sup>%</sup></strong></div><small>Best competing result → OccPlanner · +44.92 percentage points</small></article>
-      <article><p>Long range (5–8 m) · Commercial · SR</p><div><span>19.07<sup>%</sup></span><i>→</i><strong>45.17<sup>%</sup></strong></div><small>Best competing result → OccPlanner · +26.10 percentage points</small></article>
-      <article><p>Long range (5–8 m) · Cluttered-Easy · SR</p><div><span>19.43<sup>%</sup></span><i>→</i><strong>86.20<sup>%</sup></strong></div><small>Best competing result → OccPlanner · +66.77 percentage points</small></article>
-      <article><p>Long range (5–8 m) · Cluttered-Hard · SR</p><div><span>19.77<sup>%</sup></span><i>→</i><strong>84.92<sup>%</sup></strong></div><small>Best competing result → OccPlanner · +65.15 percentage points</small></article>
+      <article><p>Long range (5–8 m) · Home · SR</p><div><span>24.98<sup>%</sup></span><i>→</i><strong>69.90<sup>%</sup></strong></div><small>NavDP → OccPlanner · +44.92 percentage points</small></article>
+      <article><p>Long range (5–8 m) · Commercial · SR</p><div><span>19.07<sup>%</sup></span><i>→</i><strong>45.17<sup>%</sup></strong></div><small>NavDP → OccPlanner · +26.10 percentage points</small></article>
+      <article><p>Long range (5–8 m) · Cluttered-Easy · SR</p><div><span>19.43<sup>%</sup></span><i>→</i><strong>86.20<sup>%</sup></strong></div><small>NavDP → OccPlanner · +66.77 percentage points</small></article>
+      <article><p>Long range (5–8 m) · Cluttered-Hard · SR</p><div><span>19.77<sup>%</sup></span><i>→</i><strong>84.92<sup>%</sup></strong></div><small>NavDP → OccPlanner · +65.15 percentage points</small></article>
     </div>
     <article class="result-block">
       <div class="result-copy"><span>Simulation</span><h3>Consistent pixel-goal grounding across diverse scene layouts.</h3><p>Across home, commercial, cluttered-easy, and cluttered-hard scenes, OccPlanner predicts smooth trajectories that remain within inferred traversable regions while avoiding observed obstacles. Its larger gains under long-range and cluttered settings indicate improved robustness to extended planning horizons and complex local geometry.</p></div>
-      <figure class="figure-card"><a href="./assets/occplanner_sim_result.png" target="_blank" rel="noreferrer"><img src="./assets/occplanner_sim_result.png" width="4120" height="3220" loading="lazy" alt="Qualitative simulation results with RGB observations and red pixel goals above predicted local occupancy and goal-conditioned trajectories"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative simulation results.</strong> Top: RGB observations with pixel goals marked in red. Bottom: predicted local occupancy and goal-conditioned trajectories. The trajectories remain within traversable regions while avoiding observed obstacles across diverse scene layouts.</figcaption></figure>
+      <figure class="figure-card"><a href="./assets/occplanner/occplanner_sim_result.png" target="_blank" rel="noreferrer"><img src="./assets/occplanner/occplanner_sim_result.png" width="4120" height="3220" loading="lazy" alt="Qualitative simulation results with RGB observations and red pixel goals above predicted local occupancy and goal-conditioned trajectories"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative simulation results.</strong> Top: RGB observations with pixel goals marked in red. Bottom: predicted local occupancy and goal-conditioned trajectories. The trajectories remain within traversable regions while avoiding observed obstacles across diverse scene layouts.</figcaption></figure>
     </article>
     <article class="result-block result-block-real">
-      <div class="result-copy"><span>Real world</span><h3>Zero-shot transfer and real-world adaptation.</h3><p>We evaluate OccPlanner in an open-loop setting using RGB-D sequences recorded by a Unitree G1 in a cluttered office. The simulator-trained model captures coarse obstacle structure and produces goal-conditioned trajectories without real-world fine-tuning; fine-tuning on a disjoint set of real-world sequences yields denser, more spatially coherent occupancy while preserving smooth trajectories through inferred free space.</p></div>
-      <figure class="figure-card"><a href="./assets/real_compare.png" target="_blank" rel="noreferrer"><img src="./assets/real_compare.png" loading="lazy" alt="Qualitative open-loop comparison of zero-shot simulator-trained and real-world fine-tuned OccPlanner predictions on a Unitree G1"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative real-world open-loop comparison on a Unitree G1.</strong> The top and bottom rows show zero-shot simulator-trained and real-world fine-tuned predictions, respectively, for the same real-world RGB-D observations and pixel goals. Fine-tuning produces denser and more spatially coherent local occupancy predictions while preserving smooth goal-conditioned trajectories.</figcaption></figure>
-      <div class="real-demo-heading" id="real-demos"><span>Fine-tuned model</span><h4>Real-world prediction demos</h4><p>Open-loop occupancy and trajectory predictions from the real-world fine-tuned model on RGB-D sequences recorded by a Unitree G1 in a cluttered office.</p></div>
-      <div class="real-video-grid">
-        <figure><video controls muted loop playsinline preload="metadata" aria-label="Real-world fine-tuned OccPlanner demo one"><source src="./assets/real_1_web.mp4" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Office sequence 01</figcaption></figure>
-        <figure><video controls muted loop playsinline preload="metadata" aria-label="Real-world fine-tuned OccPlanner demo two"><source src="./assets/real_2_web.mp4" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Office sequence 02</figcaption></figure>
-        <figure><video controls muted loop playsinline preload="metadata" aria-label="Real-world fine-tuned OccPlanner demo three"><source src="./assets/real_3_web.mp4" type="video/mp4">Your browser does not support embedded video.</video><figcaption>Office sequence 03</figcaption></figure>
+      <div class="result-copy"><span>Real world</span><h3>From open-loop adaptation to physical closed-loop navigation.</h3><p>We first compare the simulator-trained and real-world fine-tuned models in an open-loop setting using the same RGB-D observations and pixel goals. We then deploy the fine-tuned OccPlanner on a Unitree G2 for qualitative physical closed-loop navigation in a cluttered office.</p></div>
+      <figure class="figure-card"><a href="./assets/real/real_compare.png" target="_blank" rel="noreferrer"><img src="./assets/real/real_compare.png" loading="lazy" alt="Qualitative open-loop comparison of zero-shot simulator-trained and real-world fine-tuned OccPlanner predictions on a Unitree G2"><span class="expand-label">Full resolution ↗</span></a><figcaption><strong>Qualitative real-world open-loop comparison on a Unitree G2.</strong> The top and bottom rows show zero-shot simulator-trained and real-world fine-tuned predictions, respectively, for the same real-world RGB-D observations and pixel goals. Fine-tuning produces denser and more spatially coherent local occupancy predictions while preserving smooth goal-conditioned trajectories.</figcaption></figure>
+      <div class="real-trail-heading"><span>Physical closed-loop runs</span><h4>Executed motion at a glance.</h4><p>Stroboscopic motion-trail views of the nine real-world demonstrations shown above. Each image overlays successive Unitree G2 poses to summarize the executed closed-loop motion in a single frame.</p></div>
+      <div class="real-trail-grid">
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_1_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_1_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run one"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 01</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_2_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_2_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run two"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 02</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_3_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_3_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run three"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 03</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_4_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_4_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run four"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 04</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_5_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_5_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run five"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 05</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_6_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_6_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run six"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 06</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_7_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_7_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run seven"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 07</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_8_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_8_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run eight"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 08</figcaption></figure>
+        <figure class="figure-card"><a href="./assets/real/trail/20/real_9_trail.png" target="_blank" rel="noreferrer"><img src="./assets/real/trail/20/real_9_trail.png" width="1280" height="720" loading="lazy" alt="Motion-trail composite for physical closed-loop Unitree G2 navigation run nine"><span class="expand-label">Full resolution ↗</span></a><figcaption>Closed-loop run 09</figcaption></figure>
       </div>
     </article>
-    <aside class="scope-note"><span>Evaluation boundary</span><p>These qualitative results evaluate occupancy and trajectory prediction on recorded real-world RGB-D sequences in an open-loop setting. They provide initial evidence of sim-to-real transfer and adaptation, but do not claim physical closed-loop deployment.</p></aside>
+    <aside class="scope-note"><span>Evaluation boundary</span><p>The comparison figure reports open-loop occupancy and trajectory prediction on recorded real-world RGB-D sequences. The real-world gallery above separately shows qualitative physical closed-loop navigation with the fine-tuned model; these runs are demonstrations rather than a quantitative real-world benchmark.</p></aside>
   </section>
 
   <footer class="section-wide">
