@@ -1,5 +1,5 @@
 (() => {
-  const sectionIds = ["real-demos", "demo", "overview", "l3rocc", "occplanner", "results"];
+  const sectionIds = ["real-demos", "demo", "overview", "occplanner", "l3rocc", "results"];
   const sections = sectionIds
     .map((id) => document.getElementById(id))
     .filter(Boolean);
