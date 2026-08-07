@@ -60,21 +60,47 @@ def align_to_reference(frame: np.ndarray, reference: np.ndarray) -> np.ndarray:
     )
 
 
-def make_trail(source: Path, destination: Path, poses: int) -> None:
+def build_cutout_mask(frame: np.ndarray, background: np.ndarray) -> np.ndarray:
+    """Extract a crisp moving-robot mask while rejecting textured background noise."""
+    difference = cv2.absdiff(frame, background)
+    difference = cv2.GaussianBlur(difference, (5, 5), 0)
+    motion = np.max(difference, axis=2).astype(np.uint8)
+    _, mask = cv2.threshold(motion, 25, 255, cv2.THRESH_BINARY)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    mask = keep_motion_regions(mask, minimum_area=500)
+    return cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=1)
+
+
+def make_trail(source: Path, destination: Path, poses: int, stabilize: bool) -> None:
     capture = cv2.VideoCapture(str(source))
     if not capture.isOpened():
         raise RuntimeError(f"Could not open {source}")
 
-    frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
+    # Decode HEVC only once. Repeated random seeks are both slow and unreliable
+    # around long GOP boundaries.
+    frames: list[np.ndarray] = []
+    while True:
+        ok, frame = capture.read()
+        if not ok:
+            break
+        frames.append(frame)
+    capture.release()
+
+    frame_count = len(frames)
     if frame_count < poses:
         raise RuntimeError(f"{source} contains too few frames")
 
-    reference = read_frame(capture, frame_count // 2)
+    reference = frames[frame_count // 2]
 
-    # Stabilize the handheld recording before estimating the empty office background.
+    def prepare(frame: np.ndarray) -> np.ndarray:
+        return align_to_reference(frame, reference) if stabilize else frame
+
+    # The temporal median removes the moving robot and reconstructs a clean background.
+    # Fixed-camera videos remain in their native pixels to preserve maximum sharpness.
     background_indices = np.linspace(0, frame_count - 1, min(61, frame_count), dtype=int)
     background_frames = [
-        align_to_reference(read_frame(capture, int(index)), reference)
+        prepare(frames[int(index)])
         for index in background_indices
     ]
     background = np.median(np.stack(background_frames), axis=0).astype(np.uint8)
@@ -83,24 +109,15 @@ def make_trail(source: Path, destination: Path, poses: int) -> None:
     pose_indices = np.linspace(frame_count * 0.08, frame_count * 0.92, poses, dtype=int)
     canvas = background.astype(np.float32)
 
-    for order, index in enumerate(pose_indices):
-        frame = align_to_reference(read_frame(capture, int(index)), reference)
-        difference = cv2.absdiff(frame, background)
-        difference = cv2.GaussianBlur(difference, (5, 5), 0)
-        motion = np.max(difference, axis=2).astype(np.uint8)
-        _, mask = cv2.threshold(motion, 22, 255, cv2.THRESH_BINARY)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
-        mask = keep_motion_regions(mask, minimum_area=350)
-        mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=1)
-        mask = cv2.GaussianBlur(mask, (9, 9), 0).astype(np.float32) / 255.0
+    for index in pose_indices:
+        frame = prepare(frames[int(index)])
+        mask = build_cutout_mask(frame, background)
 
-        # Later poses are slightly more opaque, giving the sequence a clear direction.
-        opacity = 0.70 + 0.20 * order / max(poses - 1, 1)
-        alpha = (mask * opacity)[..., None]
+        # Keep robot interiors fully opaque. Only a 1--2 px feather remains at the
+        # silhouette boundary for antialiasing, so individual poses stay sharp.
+        alpha = (cv2.GaussianBlur(mask, (3, 3), 0.65).astype(np.float32) / 255.0)[..., None]
         canvas = frame.astype(np.float32) * alpha + canvas * (1.0 - alpha)
 
-    capture.release()
     destination.parent.mkdir(parents=True, exist_ok=True)
     if not cv2.imwrite(str(destination), np.clip(canvas, 0, 255).astype(np.uint8)):
         raise RuntimeError(f"Could not write {destination}")
@@ -112,6 +129,19 @@ def main() -> None:
     )
     parser.add_argument("videos", nargs="+", type=Path, help="Input video files")
     parser.add_argument("--poses", type=int, default=7, help="Number of overlaid poses")
+    parser.add_argument(
+        "--stabilize",
+        dest="stabilize",
+        action="store_true",
+        default=True,
+        help="Align footage before compositing (enabled by default)",
+    )
+    parser.add_argument(
+        "--no-stabilize",
+        dest="stabilize",
+        action="store_false",
+        help="Skip alignment only for perfectly locked-off footage",
+    )
     parser.add_argument(
         "--output-dir",
         type=Path,
@@ -125,7 +155,7 @@ def main() -> None:
     for video in args.videos:
         output_name = f"{video.stem}_trail.png"
         output = args.output_dir / output_name if args.output_dir else video.with_name(output_name)
-        make_trail(video, output, args.poses)
+        make_trail(video, output, args.poses, args.stabilize)
         print(output)
 
 
