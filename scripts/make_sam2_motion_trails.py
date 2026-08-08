@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create sharp Unitree G2 motion trails with SAM 2 video segmentation."""
+"""Create sharp Unitree Go2 motion trails with SAM 2 video segmentation."""
 
 from __future__ import annotations
 

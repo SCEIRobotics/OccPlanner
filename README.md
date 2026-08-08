@@ -12,8 +12,8 @@ OccPlanner grounds a pixel goal in robot-centric metric space, predicts visibili
 
 - Closed-loop simulation evaluation on 6,000 episodes across 60 unseen indoor scenes.
 - Short- and long-range navigation over home, commercial, cluttered-easy, and cluttered-hard environments.
-- Open-loop sim-to-real comparison and real-world fine-tuning on Unitree G2 RGB-D sequences.
-- Qualitative physical closed-loop navigation demonstrations on a Unitree G2.
+- Open-loop sim-to-real comparison and real-world fine-tuning on Unitree Go2 RGB-D sequences.
+- Qualitative physical closed-loop navigation demonstrations on a Unitree Go2.
 - L3ROcc supervision-generation and OccPlanner prediction demos.
 
 ## Repository structure
@@ -28,7 +28,7 @@ OccPlanner grounds a pixel goal in robot-centric metric space, predicts visibili
 │   ├── l3rocc/                  # L3ROcc figures and posters
 │   ├── occplanner/              # OccPlanner figures and results
 │   ├── real/
-│   │   ├── video/               # Original Unitree G2 recordings
+│   │   ├── video/               # Original Unitree Go2 recordings
 │   │   ├── web/                 # Web-encoded real-world videos
 │   │   ├── poster/              # Video posters
 │   │   └── trail/results/       # Motion-trail images used by the page
