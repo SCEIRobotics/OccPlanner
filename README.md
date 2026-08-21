@@ -4,85 +4,21 @@ Project page for **OccPlanner: Goal-Aware Occupancy-Conditioned Diffusion Planne
 
 OccPlanner grounds a pixel goal in robot-centric metric space, predicts visibility-aware local 3D occupancy from RGB-D history, and generates continuous obstacle-aware trajectories with a diffusion planner. L3ROcc supplies dense training supervision by converting monocular navigation videos into temporally consistent occupancy, visibility, and trajectory annotations.
 
-**Project page:** <https://sceirobotics.github.io/OccPlanner/>
+[Project Page](https://sceirobotics.github.io/OccPlanner/) · **Paper:** Coming soon · **Code:** Coming soon
+\n![OccPlanner and L3ROcc overview](assets/teaser.png)
 
-> Paper and code are coming soon.
+## Method
 
-## Highlights
+- **OccPlanner** is a goal-aware occupancy-conditioned diffusion planner for pixel-goal navigation. It grounds the pixel goal in robot-centric metric space, predicts visibility-aware local 3D occupancy from RGB-D history, and uses temporal context together with compact near-ground occupancy tokens to condition continuous trajectory generation.
+- **L3ROcc** is a training-data generation pipeline that converts monocular navigation videos into temporally consistent, robot-centric occupancy, visibility, and trajectory annotations through geometric reconstruction, metric alignment, voxelization, and visibility-aware ray marching.
 
-- Closed-loop simulation evaluation on 6,000 episodes across 60 unseen indoor scenes.
-- Short- and long-range navigation over home, commercial, cluttered-easy, and cluttered-hard environments.
-- Open-loop sim-to-real comparison and real-world fine-tuning on Unitree Go2 RGB-D sequences.
-- Qualitative physical closed-loop navigation demonstrations on a Unitree Go2.
-- L3ROcc supervision-generation and OccPlanner prediction demos.
+## Evaluation
 
-## Repository structure
+OccPlanner is evaluated in closed loop on 6,000 fixed episodes across 60 unseen indoor scenes, covering home, commercial, cluttered-easy, and cluttered-hard environments at 3–5 m and 5–8 m goal ranges.
 
-```text
-.
-├── index.html                    # Page content
-├── style.css                    # Layout and visual design
-├── script.js                    # Video autoplay and page interactions
-├── assets/
-│   ├── demos/                   # L3ROcc and OccPlanner system demos
-│   ├── l3rocc/                  # L3ROcc figures and posters
-│   ├── occplanner/              # OccPlanner figures and results
-│   ├── real/
-│   │   ├── video/               # Original Unitree Go2 recordings
-│   │   ├── web/                 # Web-encoded real-world videos
-│   │   ├── poster/              # Video posters
-│   │   └── trail/results/       # Motion-trail images used by the page
-│   └── sim/                     # Simulation demo video and poster
-└── scripts/
-    ├── make_sim_demo_grid.sh    # Build the synchronized simulation grid
-    ├── make_motion_trails.py    # OpenCV motion-trail generator
-    └── make_sam2_motion_trails.py
-                                  # SAM2 robot-segmented trail generator
-```
+For 5–8 m goals, OccPlanner improves success rate over NavDP from **19.43% to 86.20%** in cluttered-easy scenes and from **19.77% to 84.92%** in cluttered-hard scenes, while also improving SPL and reducing final distance to goal.
 
-## Local preview
+## Real-world experiments
 
-The site is fully static. From the repository root, start a local server:
+We compare the simulator-trained and real-world fine-tuned models in an open-loop setting using identical RGB-D observations and pixel goals. The fine-tuned OccPlanner is also deployed on a **Unitree Go2** for qualitative physical closed-loop navigation in a cluttered office. These runs are demonstrations rather than a quantitative real-world benchmark.
 
-```bash
-python -m http.server 8000
-```
-
-Then open <http://localhost:8000/>. Using a local server is recommended because browser behavior for videos and relative paths can differ when opening `index.html` directly.
-
-## Media generation
-
-### Simulation demo grid
-
-The grid script arranges the 12 simulation runs into three rows and freezes shorter runs on their last frame until the longest sequence finishes:
-
-```bash
-bash scripts/make_sim_demo_grid.sh
-```
-
-Raw simulation clips under `assets/sim/video/` are intentionally excluded from Git; the generated web video and poster are stored under `assets/sim/web/` and `assets/sim/poster/`.
-
-### SAM2 motion trails
-
-The current real-world trail style uses six robot poses per run. The first and last poses remain sharp and fully opaque, while intermediate poses are softly blurred with a minimum opacity of 50%:
-
-```bash
-conda run --no-capture-output -n sam2 \
-  python scripts/make_sam2_motion_trails.py \
-  assets/real/video/real_1.mp4 \
-  --poses 6 \
-  --style temporal \
-  --min-opacity 0.50 \
-  --output-dir assets/real/trail/results
-```
-
-Pass multiple video paths to generate several trail images in one run. The script currently expects the SAM2 repository and `sam2.1_hiera_base_plus.pt` checkpoint at the default paths declared in the script; both can be overridden with `--sam2-root` and `--checkpoint`.
-
-## Updating the page
-
-- Edit page copy, metrics, captions, and links in `index.html`.
-- Edit typography, colors, spacing, and responsive layout in `style.css`.
-- Replace media with files of the same name, then update the corresponding `?v=` cache key in `index.html`.
-- The nine motion-trail cards currently load `assets/real/trail/results/real_1_trail.png` through `real_9_trail.png`.
-
-When the paper and source code are released, replace the two “coming soon” elements in `index.html` with their public links.
