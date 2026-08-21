@@ -5,6 +5,7 @@ Project page for **OccPlanner: Goal-Aware Occupancy-Conditioned Diffusion Planne
 OccPlanner grounds a pixel goal in robot-centric metric space, predicts visibility-aware local 3D occupancy from RGB-D history, and generates continuous obstacle-aware trajectories with a diffusion planner. L3ROcc supplies dense training supervision by converting monocular navigation videos into temporally consistent occupancy, visibility, and trajectory annotations.
 
 [Project Page](https://sceirobotics.github.io/OccPlanner/) · **Paper:** Coming soon · **Code:** Coming soon
+
 ![OccPlanner and L3ROcc overview](assets/teaser.png)
 
 ## Method
